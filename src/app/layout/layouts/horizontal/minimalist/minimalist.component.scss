@@ -1,0 +1,17 @@
+.bg-layout {
+  background-color:hsla(225,63%,83%,1);
+  background-image:
+    radial-gradient(at 80% 50%, hsla(255,255%,255%,1) 0px, transparent 50%),
+    radial-gradient(at 40% 20%, hsla(2,125%,250%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(20,103%,255%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(20,187%,255%,1) 0px, transparent 50%);
+  //background: url("/assets/bg-color-1.png");
+  //background-size: cover;
+  //background: hsla(259, 84%, 78%, 1);
+  //
+  //background: linear-gradient(90deg, hsla(259, 84%, 78%, 1) 0%, hsla(206, 67%, 75%, 1) 100%);
+  //
+  //background: -moz-linear-gradient(90deg, hsla(259, 84%, 78%, 1) 0%, hsla(206, 67%, 75%, 1) 100%);
+  //
+  //background: -webkit-linear-gradient(90deg, hsla(259, 84%, 78%, 1) 0%, hsla(206, 67%, 75%, 1) 100%);
+}

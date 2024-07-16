@@ -1,0 +1,53 @@
+<div class="flex flex-col items-center justify-center gap-y-20 w-full h-full">
+  <div @fadeInOut class="title-header mb-5 text-center">
+    <h1 class="font-primary text-9xl m-auto text-blue-800 leading-none mb-4">Hi. I'm Adhitomo. <br> A Software Engineer.</h1>
+    <span class="text-xl text-blue-900 m-auto">
+      I'm passionate about crafting experiences that are engaging, accessible, and user-centric.
+    </span>
+  </div>
+
+  <div @fadeInOut class="container w-full">
+    <div class="section-first">
+      <app-block-section-home-working [listBlock]="listWorking"></app-block-section-home-working>
+    </div>
+
+    <div @fadeInOut class="section-second">
+      <div class="title-header mb-5 text-center my-30 mb-30">
+        <h1 class="font-primary text-9xl m-auto text-blue-800 leading-none mb-4">In Progress.</h1>
+        <span class="text-xl text-blue-900 m-auto">
+          Work in various states of design and development, from side projects, to in-flight product design and development.
+        </span>
+      </div>
+
+      <app-block-section-home-working [listBlock]="listOnProgress"></app-block-section-home-working>
+    </div>
+  </div>
+<!--  <div class="flex flex-row items-end justify-center w-full gap-10 max-w-screen-xl">-->
+<!--    <div class="basis-1/4">-->
+<!--      <div class="relative rounded-t-full bg-white w-80 h-100 overflow-hidden">-->
+<!--        <img class="w-full h-full object-cover object-top" src="assets/images/profile-picture.JPG" alt="">-->
+<!--        <div class="bg-blue-900 text-white w-80 h-22 absolute bottom-0 left-0 right-0">-->
+<!--          <a href="https://www.linkedin.com/in/adhi-wiratomo-a42bb9190" target="_blank" class="outline-none flex flex-row justify-center gap-4 pt-2 items-end">-->
+<!--            <mat-icon class="text-blue-200 w-14 h-14 pe-4" svgIcon="feather:linkedin"></mat-icon>-->
+<!--            <div class="text-blue-200 font-primary">-->
+<!--              <div class="text-lg mb-0"> connect with me </div>-->
+<!--              <span class="text-4xl">adhitomoo</span>-->
+<!--            </div>-->
+<!--          </a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="basis-1/2">-->
+<!--      <p class="text-8xl font-primary text-blue-800 mb-5" style="line-height: 1.125em">-->
+<!--        I'm a Frontend Developer working remotely from Yogyakarta, Indonesia.-->
+<!--      </p>-->
+
+<!--      <p class="text-2xl text-blue-900">-->
+<!--        Over the past 3.5 years, I've embarked on an exciting journey as a frontend developer, where I've honed my skills in digital design, UI/UX, and digital marketing-->
+<!--        <br><br>-->
+<!--        My career began with a passion for creating intuitive and visually appealing user interfaces, which led me to specialize in frontend development.-->
+<!--      </p>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>

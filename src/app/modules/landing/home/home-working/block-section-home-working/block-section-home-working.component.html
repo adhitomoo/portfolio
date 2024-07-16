@@ -1,0 +1,67 @@
+<ng-container>
+  <div class="container grid grid-cols-5 grid-rows-2 grid gap-15">
+    @for (list of listBlock; track list) {
+      <div [class]="list.grid" class="outer-card group relative">
+        @if(list.grid === 'col-span-2') {
+          <img *ngIf="list.icon_1" src="./assets/icons/{{ list.icon_1 }}" class="max-w-30 absolute slide-top" [class]="list.class_1" alt="icon-card">
+        } @else {
+          <img *ngIf="list.icon_1" src="./assets/icons/{{ list.icon_1 }}" class="max-w-40 absolute slide-top" [class]="list.class_1" alt="icon-card">
+          <img *ngIf="list.icon_2 && list.class_2" src="./assets/icons/{{ list.icon_2 }}" class="max-w-40 absolute slide-top" [class]="list.class_2" alt="icon-card">
+        }
+        <div class="card w-auto h-120 rounded-3xl pt-6 px-12 overflow-hidden relative" [class]="list.color">
+          <div class="card-header text-right">
+            <span class="text-lg text-blue-900 tracking-widest">{{ list.subtitle }}</span>
+            <h4 class="fw-bold text-4xl font-primary text-blue-900">{{ list.title }}</h4>
+          </div>
+          <div class="card-content">
+            @if(list.grid === 'col-span-2') {
+              <div class="absolute -right-40 -bottom-20 max-w-full">
+                <img src="./assets/images/{{ list.image }}" alt="docs" class="slide-bottom" style="scale: 1.25">
+              </div>
+            } @else {
+              <div class="absolute -right-40 -bottom-60 max-w-full">
+                <img src="./assets/images/{{ list.image }}" alt="docs" class="slide-bottom">
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+<!--    <div class="col-span-2">-->
+<!--      <div class="card w-auto h-120 rounded-3xl bg-blue-200 py-6 px-12">-->
+<!--        <div class="card-header text-right">-->
+<!--          <span class="text-lg text-blue-900 tracking-widest">{{ 'MARKETPLACE' }}</span>-->
+<!--          <h4 class="fw-bold text-4xl font-primary text-blue-900">{{ 'Saudagar Emas' }}</h4>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="col-span-3">-->
+<!--      <div class="card w-auto h-120 rounded-3xl bg-teal-200 py-6 px-12">-->
+<!--        <div class="card-header text-right">-->
+<!--          <span class="text-lg text-blue-900 tracking-widest">{{ 'COMPANY PROFILE' }}</span>-->
+<!--          <h4 class="fw-bold text-4xl font-primary text-blue-900">{{ 'MJA Gaharu' }}</h4>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="col-span-3">-->
+<!--      <div class="card w-auto h-120 rounded-3xl bg-yellow-200 py-6 px-12">-->
+<!--        <div class="card-header text-right">-->
+<!--          <span class="text-lg text-blue-900 tracking-widest">{{ 'SOFTWARE INTERN' }}</span>-->
+<!--          <h4 class="fw-bold text-4xl font-primary text-blue-900">{{ 'UII Recruitment ' }}</h4>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="col-span-2">-->
+<!--      <div class="card w-auto h-120 rounded-3xl bg-violet-200 py-6 px-12">-->
+<!--        <div class="card-header text-right">-->
+<!--          <span class="text-lg text-blue-900 tracking-widest">{{ 'SOFTWARE INTERN' }}</span>-->
+<!--          <h4 class="fw-bold text-4xl font-primary text-blue-900">{{ 'UII Organization' }}</h4>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+</ng-container>

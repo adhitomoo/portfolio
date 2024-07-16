@@ -1,0 +1,45 @@
+<div class="container m-auto">
+  <fuse-masonry
+    class="-mx-2"
+    [items]="skills"
+    [columns]="3"
+    [columnsTemplate]="columnsTemplate">
+  </fuse-masonry>
+
+  <ng-template
+    #columnsTemplate
+    let-columns>
+    <ng-container *ngFor="let column of columns">
+      <!-- Column -->
+      <div class="flex-1 mx-2 p-2 rounded space-y-6">
+        <ng-container *ngFor="let item of column.items">
+          @if (item.type === 'core') {
+            <!-- Item -->
+            <div @fadeInOut class="flex flex-row gap-4 justify-between py-4 px-8 rounded-2xl bg-sky-100 shadow-accent-100 backdrop-opacity-50 text-on-primary">
+              <div class="text-primary">
+                <h4 class="text-2xl fw-bold font-primary mb-5">{{ item.name }}</h4>
+                <span class="text-md">{{ item.description }}</span>
+              </div>
+              <div *ngIf="item.icon" class="flex-1">
+                <div class="w-20 h-20 rounded-full bg-blue-200 overflow-hidden">
+                  <img class="scale-50 flex justify-center items-center object-cover" src="./assets/icons/{{ item.icon }}">
+                </div>
+              </div>
+            </div>
+          } @else if (item.type === 'soft') {
+            <div @fadeInOut class="flex flex-row gap-4 relative justify-center py-4 px-8 rounded-2xl border-2 border-primary shadow-accent-100 backdrop-opacity-50 text-on-primary group outer-card">
+              <div class="text-primary">
+                <h4 class="text-3xl fw-bold font-primary mb-5">{{ item.name }}</h4>
+              </div>
+              <div class="absolute -top-12 -right-5 rotate-90-bottom-cw">
+                <div class="w-20 h-20">
+                  <img class="flex justify-center items-center object-cover text-primary" src="./assets/icons/{{ item.icon }}">
+                </div>
+              </div>
+            </div>
+          }
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>

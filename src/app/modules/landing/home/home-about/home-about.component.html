@@ -1,0 +1,36 @@
+<div class="flex flex-col items-center justify-center gap-y-20 w-full h-full">
+  <div @fadeInOut class="title-header mb-5 flex items-center">
+    <h1 class="font-primary text-9xl text-blue-800">I'm Adhitomo</h1>
+    <img class="w-30" src="./assets/icons/curriculum_vitae.svg" alt="docs">
+  </div>
+  <div @fadeInOut class="flex flex-row items-end justify-center w-full gap-10 max-w-screen-xl">
+    <div class="basis-1/4">
+      <div class="relative rounded-t-full bg-white w-80 h-100 overflow-hidden">
+        <img class="w-full h-full object-cover object-top" src="assets/images/profile-picture.JPG" alt="">
+        <div class="bg-blue-900 text-white w-80 h-22 absolute bottom-0 left-0 right-0">
+          <a href="https://www.linkedin.com/in/adhi-wiratomo-a42bb9190" target="_blank" class="outline-none flex flex-row justify-center gap-4 pt-2 items-end">
+            <mat-icon class="text-blue-200 w-14 h-14 pe-4" svgIcon="feather:linkedin"></mat-icon>
+            <div class="text-blue-200 font-primary">
+              <div class="text-lg mb-0"> connect with me </div>
+              <span class="text-4xl">adhitomoo</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div @fadeInOut class="basis-1/2">
+      <p class="text-8xl font-primary text-blue-800 mb-5" style="line-height: 1.125em">
+        I'm a Software Engineer working remotely from Yogyakarta, Indonesia.
+      </p>
+
+      <p @fadeInOut class="text-2xl text-blue-900">
+        Over the past 3.5 years, I've embarked on an exciting journey as a frontend developer, where I've honed my skills in digital design, UI/UX, and digital marketing
+        <br><br>
+        My career began with a passion for creating intuitive and visually appealing user interfaces, which led me to specialize in frontend development.
+      </p>
+    </div>
+  </div>
+
+  <app-home-experience @fadeInOut></app-home-experience>
+</div>
