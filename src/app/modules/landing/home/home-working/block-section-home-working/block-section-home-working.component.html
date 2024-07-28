@@ -1,5 +1,5 @@
 <ng-container>
-  <div class="container grid grid-cols-5 grid-rows-2 grid gap-15">
+  <div *ngIf="!isSmallScreen" class="container grid grid-cols-5 grid-rows-2 gap-15">
     @for (list of listBlock; track list) {
       <div [class]="list.grid" class="outer-card group relative">
         @if(list.grid === 'col-span-2') {
@@ -27,6 +27,39 @@
         </div>
       </div>
     }
+  </div>
+
+  <div *ngIf="isSmallScreen">
+    <div class="container flex flex-col gap-10">
+      @for (list of listBlock; track list) {
+        <div [class]="list.grid" class="outer-card group relative m-4">
+          <!-- @if(list.grid === 'col-span-2') {
+            <img *ngIf="list.icon_1" src="./assets/icons/{{ list.icon_1 }}" class="max-w-10 absolute slide-top" [class]="list.class_1" alt="icon-card">
+          } @else {
+            <img *ngIf="list.icon_1" src="./assets/icons/{{ list.icon_1 }}" class="max-w-20 absolute slide-top" [class]="list.class_1" alt="icon-card">
+            <img *ngIf="list.icon_2 && list.class_2" src="./assets/icons/{{ list.icon_2 }}" class="max-w-20 absolute slide-top" [class]="list.class_2" alt="icon-card">
+          } -->
+          <div class="card w-auto h-80 rounded-3xl pt-6 px-12 overflow-hidden relative" [class]="list.color">
+            <div class="card-header text-right">
+              <span class="text-lg text-blue-900 tracking-widest">{{ list.subtitle }}</span>
+              <h4 class="fw-bold text-4xl font-primary text-blue-900">{{ list.title }}</h4>
+            </div>
+            <div class="card-content">
+              <div class="absolute -right-40 -bottom-20 max-w-full">
+                <img src="./assets/images/{{ list.image }}" alt="docs" class="slide-bottom" style="scale: 1.10">
+              </div>
+              <!-- @if(list.grid === 'col-span-2') {
+
+              } @else {
+                <div class="absolute -right-40 -bottom-60 max-w-full">
+                  <img src="./assets/images/{{ list.image }}" alt="docs" class="slide-bottom">
+                </div>
+              } -->
+            </div>
+          </div>
+        </div>
+      }
+    </div>
   </div>
 <!--    <div class="col-span-2">-->
 <!--      <div class="card w-auto h-120 rounded-3xl bg-blue-200 py-6 px-12">-->

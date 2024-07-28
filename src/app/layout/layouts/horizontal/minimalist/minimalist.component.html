@@ -1,56 +1,53 @@
 <!-- Loading bar -->
 <fuse-loading-bar></fuse-loading-bar>
 
-<!-- Navigation -->
-<ng-container *ngIf="isScreenSmall">
-  <fuse-vertical-navigation
-          class="dark bg-gray-900 print:hidden"
-          [mode]="'over'"
-          [name]="'mainNavigation'"
-          [navigation]="navigation.default"
-          [opened]="false">
-    <!-- Navigation header hook -->
-    <ng-container fuseVerticalNavigationContentHeader>
-      <!-- Logo -->
-      <div class="flex items-center h-20 pt-6 px-8 gap-1.5">
-        <img
-                class="w-24"
-                src="assets/images/logo/logo-text-on-dark.svg"
-                alt="Logo image">
-      </div>
-    </ng-container>
-  </fuse-vertical-navigation>
-</ng-container>
-
 <!-- Wrapper -->
-<div class="bg-layout flex flex-col flex-auto w-full min-w-0">
+<div class="bg-layout flex flex-col flex-auto w-full min-w-0 max-w-screen">
   <!-- Header -->
-  <div class="relative flex flex-0 items-center w-full h-16 sm:h-20 px-4 md:px-6 z-49 justify-center dark:bg-transparent print:hidden">
-    <ng-container *ngIf="!isScreenSmall">
-      <ul class="relative top-2 flex flex-0 gap-4 p-4 bg-blue-200 rounded-3xl top-10 backdrop-blur-lg backdrop-saturate-50 backdrop-opacity-25">
-        @for (menu of menus; track menu.label) {
-          <button [routerLink]="menu.route">
-            <li class="text-2xl font-primary">
-              <a class="p-4 min-w-180 rounded-3xl hover:bg-gray-200 hover:transition-all hover:text-blue-700">
+  <div class="w-full h-16 sm:h-20 px-4 md:px-6 z-20 my-4 dark:bg-transparent print:hidden scroll-smooth focus:scroll-auto flex justify-center">
+    <nav [@entranceLeft]="showingNav" class="p-2 rounded-3xl backdrop-blur-lg backdrop-saturate-50 backdrop-opacity-25 max-w-fit h-auto" [class]="scrollClass">
+      <ng-container *ngIf="isScreenSmall">
+        <ul class="relative flex flex-row gap-4 justify-center">
+          @for (menu of menus; track menu.label) {
+            <button class="relative" (click)="onRoute(menu)">
+            <div class="bg-blue-200 absolute top-3 left-0 h-5 -z-10 focus-effect w-0 group-hover:w-full" [class]="menu?.is_active ? 'w-full' : ''"></div>
+            <li class="text-lg font-primary flex-grow">
+              <a class="rounded-3xl" [routerLink]="menu.route" href="javasript:void(0)">
                 {{ menu.label }}
               </a>
             </li>
-          </button>
-        }
-      </ul>
-    </ng-container>
+            </button>
+          }
+        </ul>
+      </ng-container>
+
+      <ng-container *ngIf="!isScreenSmall">
+        <ul class="flex flex-auto gap-4 justify-center">
+          @for (menu of menus; track menu.label) {
+            <button class="relative group" (click)="onRoute(menu)">
+              <div class="bg-blue-200 absolute top-4 left-0 h-5 -z-10 focus-effect w-0 group-hover:w-full" [class]="menu?.is_active ? 'w-full' : ''"></div>
+              <li class="text-xl lg:text-2xl font-primary">
+                <a class="p-4 min-w-180 rounded-3xl hover:transition-all focus:border-b-2">
+                  {{ menu.label }}
+                </a>
+              </li>
+            </button>
+          }
+        </ul>
+      </ng-container>
+    </nav>
     <!-- Components -->
   </div>
 
   <!-- Content -->
-  <div class="flex flex-col flex-auto w-full mb-20 relative top-40">
+  <div class="flex flex-col flex-auto w-full relative top-10 md:top-20 lg:top-40 overflow-hidden">
     <!-- *ngIf="true" hack is required here for router-outlet to work correctly.
          Otherwise, layout changes won't be registered and the view won't be updated! -->
     <router-outlet *ngIf="true"></router-outlet>
   </div>
 
   <!-- Footer -->
-  <div class="relative flex flex-0 items-center max-w-2/4 m-auto h-14 sm:h-20 px-4 md:px-6 z-49 dark:bg-transparent print:hidden">
+  <div class="relative flex flex-0 items-center m-auto h-14 sm:h-20 px-4 md:px-6 z-49 dark:bg-transparent print:hidden max-w-screen mt-20">
     <span class="text-2xl font-primary text-indigo-700 flex items-center">&copy; adhitomoo <div class="rounded-full bg-indigo-700 w-2 h-2 mx-2"></div> {{currentYear}}</span>
   </div>
 

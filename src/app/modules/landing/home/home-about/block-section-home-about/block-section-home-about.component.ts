@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 
 @Component({
   selector: 'app-block-section-home-about',
@@ -9,5 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './block-section-home-about.component.scss'
 })
 export class BlockSectionHomeAboutComponent {
+  constructor(
+  ) {}
 
 }

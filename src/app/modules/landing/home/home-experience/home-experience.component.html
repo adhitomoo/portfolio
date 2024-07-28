@@ -1,47 +1,57 @@
 <div class="max-w-3/4 m-auto">
   <a class="mb-8 text-center">
-    <div [@entranceLeft]="animationState"  class="flex flex-row flex-wrap group justify-start min-h-full gap-6 my-30">
-      <h6 class="font-primary text-blue-800 text-6xl">Career Journey.</h6>
-      @for(exp of experiences; track exp.title; let index = $index) {
-        <div class="flex flex-col flex-auto max-h-40 mb-5" [ngStyle]="{ 'min-width': exp.width + '%', 'max-width': exp.width + '%'}">
-          <div class="bg-blue-800 rounded-xl p-10">
-            <h4 class="text-3xl text-blue-200 font-primary">{{ exp.title }}</h4>
-            <span class="text-2xl text-blue-200">{{ exp.subtitle }}</span>
-            <div class="text-lg font-primary text-blue-200 fw-bold">
+    <div [@entranceLeft]="animationState"  class="flex flex-col flex-wrap justify-start min-h-full gap-4 my-30 relative">
+      <h6 class="font-primary text-blue-800 text-6xl mb-20">Career Journey.</h6>
+      <div *ngIf="isSmallScreen" class="relative flex flex-col flex-wrap gap-4 rounded-lg">
+        <div class="absolute w-1 h-full bg-blue-800 -left-5"></div>
+        @for(exp of experiences; track exp.title; let index = $index) {
+          <div class="text-blue-800 text-left">
+            <div class="text-lg font-primaryfw-bold">
               {{ (exp.dateStart === exp.dateEnd) ? exp.dateStart + '~' : exp.dateStart + '-' + exp.dateEnd }}
             </div>
+            <h4 class="text-lg md:text-3xl font-primary">{{ exp.title }}</h4>
           </div>
-        </div>
-<!--        <div class="absolute -right-40 -bottom-20 max-w-45">-->
-<!--          <img src="./assets/icons/curriculum_vitae.svg" alt="docs" class="slide-bottom">-->
-<!--        </div>-->
-      }
+        }
+      </div>
+
+      <div *ngIf="!isSmallScreen" class="relative grid grid-cols-4 grid-flow-col gap-4 justify-center items-center">
+        <div class="absolute h-1 w-full bg-blue-800 -top-5"></div>
+        @for(exp of experiences; track exp.title; let index = $index) {
+          <div class="text-blue-800 text-center relative">
+            <div class="absolute h-5 w-5 bg-blue-800 -top-7 left-0 right-0 m-auto rounded-full"></div>
+            <div class="text-lg font-primaryfw-bold">
+              {{ (exp.dateStart === exp.dateEnd) ? exp.dateStart + '~' : exp.dateStart + '-' + exp.dateEnd }}
+            </div>
+            <h4 class="text-lg md:text-3xl font-primary min-h-20">{{ exp.title }}</h4>
+          </div>
+        }
+      </div>
+
     </div>
   </a>
 
-  <div class="flex flex-row mb-10 max-w-3/4">
-    <div class="">
-      <h6 class="font-primary text-6xl text-blue-800">
-        Let's collaborate if you're committed to sustainability, education, equality, or carbon neutrality.
+  <div class="flex flex-row mb-10 max-w-full lg:max-w-3/4">
+    <div class="relative">
+      <h6 class="font-primary text-4xl lg:text-6xl text-blue-800 mb-5">
+        Let's collaborate if you have cool ideas aimed at helping others or those around you by providing solutions through digitalization.
       </h6>
-      <span class="text-2xl text-blue-900">
-        I believe we should leave this Earth as good as or better than we found it for future generations;
-        my goal is to contribute to those ideals in whatever way I can. If you feel the same, I'd love to talk.
+      <span class="text-xl lg:text-2xl text-blue-900">
+        My goal is to be someone useful and impactful to others. I believe that by having a positive impact on others, goodness will surely come to me
     </span>
     </div>
   </div>
 </div>
 
-<div class="max-w-2/3 m-auto">
-  <div class="rounded-2xl bg-white shadow-md border-b-gray-400 p-12 w-full h-auto flex flex-row flex-wrap">
+<div class="max-w-full md:max-w-2/3 lg:max-w-2/3 m-auto">
+  <div class="rounded-2xl bg-white shadow-md border-b-gray-400 p-12 w-full h-auto flex flex-row flex-wrap relative left-10 lg:left-0">
     @for (step of steps; track step.title; let index = $index) {
-      <div class="flex flex col max-w-1/2 pr-4 min-h-80">
+      <div class="flex flex-row lg:flex-col max-w-full md:max-w-1/2 lg:max-w-1/2 pr-4 min-h-80">
         <div>
-          <h2 class="text-5xl text-indigo-100 font-primary">{{ '0' + (index + 1) }}</h2>
-          <h6 class="text-4xl font-primary text-indigo-800 mb-4">
+          <h2 class="text-3xl lg:text-5xl text-indigo-100 font-primary">{{ '0' + (index + 1) }}</h2>
+          <h6 class="text-2xl lg:text-3xl font-primary text-indigo-800 mb-4">
             {{ step.title }}
           </h6>
-          <span class="text-2xl text-indigo-800"> {{ step.description }} </span>
+          <span class="text-lg lg:text-xl text-indigo-800"> {{ step.description }} </span>
         </div>
       </div>
     }

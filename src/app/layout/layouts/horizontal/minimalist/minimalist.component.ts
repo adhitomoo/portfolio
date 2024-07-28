@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
@@ -16,7 +17,7 @@ import { QuickChatComponent } from 'app/layout/common/quick-chat/quick-chat.comp
 import { SearchComponent } from 'app/layout/common/search/search.component';
 import { ShortcutsComponent } from 'app/layout/common/shortcuts/shortcuts.component';
 import { UserComponent } from 'app/layout/common/user/user.component';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, map } from 'rxjs';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOptionModule} from "@angular/material/core";
@@ -24,6 +25,8 @@ import {FormDropdownComponent} from "../../../../shared/forms/form-dropdown/form
 import {FormTextFieldComponent} from "../../../../shared/forms/form-text-field/form-text-field.component";
 import {MenuModel} from "../../../../core/services/menu/menu.model";
 import {MENU} from "../../../../core/services/menu/menu.constant";
+import { HomeCvComponent } from 'app/modules/landing/home/home-cv/home-cv.component';
+import { HomeService } from 'app/modules/landing/home/home.service';
 
 @Component({
   selector: 'minimalist-layout',
@@ -54,12 +57,62 @@ import {MENU} from "../../../../core/services/menu/menu.constant";
     RouterLink,
     // QuickChatComponent
   ],
+  animations: [
+    trigger('entranceLeft', [
+      state(
+        'normal', style({
+          transform: 'translate(0, 0)',
+          position: 'relative',
+        })
+      ),
+      state(
+        'invisible', style({
+          transform: 'translate(0, -200px)',
+          position: 'relative',
+        })
+      ),
+      state(
+        'visible', style({
+          transform: 'translate(0, 0)',
+          position: 'fixed',
+          top: 30,
+          left: 0,
+          right: 0,
+          margin: 'auto'
+        }),
+      ),
+      transition('invisible => visible', animate('600ms 0.2s ease-in')),
+      transition('visible => invisible', animate('600ms 0.2s ease-out'))
+    ])
+  ],
 })
 export class MinimalistLayoutComponent implements OnInit, OnDestroy
 {
+
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+      if(window.scrollY > 200) {
+        this.showingNav = 'visible';
+        this.scrollClass = 'bg-blue-200'
+      }
+      if(window.scrollY < 200) {
+        this.showingNav = 'invisible';
+        this.scrollClass = 'bg-transparent'
+      }
+
+      if(window.scrollY < 100) {
+        this.showingNav = 'normal'
+      }
+  }
+
+  private _homeService = inject(HomeService);
+
+  scrollClass: string;
+  showingNav: 'invisible' | 'visible' | 'normal';
   isScreenSmall: boolean;
   navigation: Navigation;
   options: string[];
+  currentRoute: string;
   public menus: MenuModel[] = MENU;
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -74,6 +127,11 @@ export class MinimalistLayoutComponent implements OnInit, OnDestroy
     private _fuseNavigationService: FuseNavigationService,
   )
   {
+    this.menus = this.menus.map((menu: MenuModel) => {
+      menu.is_active = (this._router.url.includes(menu.label.toLocaleLowerCase()));
+
+      return menu
+    })
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -112,6 +170,7 @@ export class MinimalistLayoutComponent implements OnInit, OnDestroy
       {
         // Check if the screen is small
         this.isScreenSmall = !matchingAliases.includes('md');
+        console.log(matchingAliases);
       });
   }
   /**
@@ -127,12 +186,22 @@ export class MinimalistLayoutComponent implements OnInit, OnDestroy
   // -----------------------------------------------------------------------------------------------------
   // @ Public methods
   // -----------------------------------------------------------------------------------------------------
-
+  public showCV() {
+    this._homeService._toggle.next('visible');
+  }
   /**
    * Toggle navigation
    *
    * @param name
    */
+
+  onRoute(menu: MenuModel) {
+    this._router.navigate([menu.route]);
+    menu['is_active'] = true;
+  }
+
+
+
   toggleNavigation(name: string): void
   {
     // Get the navigation

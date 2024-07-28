@@ -1,10 +1,12 @@
+import { FuseMediaWatcherService } from './../../../../../@fuse/services/media-watcher/media-watcher.service';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MENU} from "../../../../core/services/menu/menu.constant";
 import { AnimationItem } from 'lottie-web';
 import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {transform} from "lodash";
+import { Subject, takeUntil } from 'rxjs';
+
 
 @Component({
   selector: 'app-home-experience',
@@ -51,7 +53,16 @@ export class HomeExperienceComponent implements OnInit, OnDestroy{
     width?: string | number;
   }[];
 
-  constructor() {
+  isSmallScreen: boolean;
+
+  _unsubscribeAll = new Subject();
+
+  constructor(
+    private fuseWMediaWatcher: FuseMediaWatcherService
+  ) {
+    this.fuseWMediaWatcher.onMediaChange$.pipe(takeUntil(this._unsubscribeAll)).subscribe((res) => {
+      this.isSmallScreen = !res.matchingAliases.includes('sm');
+    })
     this.steps = [
       {
         title: 'Make it',
@@ -63,12 +74,12 @@ export class HomeExperienceComponent implements OnInit, OnDestroy{
       },
       {
         title: 'Accessible FTW',
-        description: 'I aim to make everything I design accessible to all for one main reason - it\'s the right thing to do. Accessible products benefit the many, not the few.'
+        description: 'I aim to make everything I design and develope accessible to all for one main reason - it\'s the right thing to do. Accessible products benefit the many, not the few.'
       },
-      {
-        title: 'Keep experimenting',
-        description: 'Everything I create is subject to change and experimentation. Not everything will work, but it\'s worth trying - and learning from what doesn\'t.'
-      }
+      // {
+      //   title: 'Keep experimenting',
+      //   description: 'Everything I create is subject to change and experimentation. Not everything will work, but it\'s worth trying - and learning from what doesn\'t.'
+      // }
     ]
     this.experiences = [
       {
@@ -86,7 +97,7 @@ export class HomeExperienceComponent implements OnInit, OnDestroy{
         dateEnd: '2023'
       },
       {
-        title: 'Freelance',
+        title: 'Multipolar',
         subtitle: 'Frontend Developer',
         icon: '',
         dateStart: '2022',
@@ -130,6 +141,8 @@ export class HomeExperienceComponent implements OnInit, OnDestroy{
     if (this.isAnimated && this.animationState === 'visible') {
       this.animationState = 'invisible'
     }
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete
   }
 
   protected readonly menus = MENU;
