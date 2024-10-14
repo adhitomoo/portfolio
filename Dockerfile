@@ -12,7 +12,7 @@ RUN npm run build --prod
 # Stage 2: Serve the app with NGINX
 FROM nginx:alpine
 
-COPY --from=build /app/dist/portfolio-v2 /usr/share/nginx/html
+COPY --from=build /app/dist/portfolio /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
