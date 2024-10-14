@@ -3,8 +3,8 @@ FROM node:18 AS build
 WORKDIR /app
 MAINTAINER Adhi Wiratomo <adhitomo22@gmail.com>
 
-COPY package*.json ./
-RUN npm install
+COPY package.json ./
+RUN npm install --legacy-peer-deps
 
 COPY . .
 RUN npm run build --prod
