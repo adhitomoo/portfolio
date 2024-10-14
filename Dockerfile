@@ -1,10 +1,10 @@
-FROM node:18 AS build
+FROM node:18
 
 WORKDIR /app
 MAINTAINER Adhi Wiratomo <adhitomo22@gmail.com>
 
-COPY package.json ./
-RUN npm install --legacy-peer-deps
+COPY package*.json ./
+RUN npm install
 
 COPY . .
 RUN npm run build --prod
@@ -19,3 +19,4 @@ EXPOSE 80
 
 # Start NGINX server
 CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
