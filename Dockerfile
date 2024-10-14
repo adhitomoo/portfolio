@@ -4,7 +4,7 @@ WORKDIR /app
 MAINTAINER Adhi Wiratomo <adhitomo22@gmail.com>
 
 COPY package*.json ./
-RUN npm install
+RUN node --max-old-space-size=4096 node_modules/.bin/npm install
 
 COPY . .
 RUN npm run build --prod
