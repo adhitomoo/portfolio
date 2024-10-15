@@ -2,7 +2,7 @@
 FROM node:18 AS build
 
 WORKDIR /app
-MAINTAINER Adhi Wiratomo <adhitomo22@gmail.com>
+LABEL maintainer="Adhi Wiratomo <adhitomo22@gmail.com>"
 
 # Copy package.json and install dependencies
 COPY package*.json ./
