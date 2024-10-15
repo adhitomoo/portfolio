@@ -7,7 +7,7 @@ LABEL maintainer="Adhi Wiratomo <adhitomo22@gmail.com>"
 # Copy package.json and install dependencies
 COPY package*.json ./
 RUN npm cache clean --force
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy all files and build the app
 COPY . .
