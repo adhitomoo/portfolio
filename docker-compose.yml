@@ -1,0 +1,5 @@
+services:
+  fuse:
+    build: .
+    ports:
+      - "3000:80"

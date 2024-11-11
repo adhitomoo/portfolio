@@ -55,7 +55,7 @@
         "@types/luxon": "3.3.4",
         "autoprefixer": "10.4.16",
         "chroma-js": "2.4.2",
-        "jasmine-core": "5.1.1",
+        "jasmine-core": "^4.6.1",
         "karma": "6.4.2",
         "karma-chrome-launcher": "3.2.0",
         "karma-coverage": "2.2.1",

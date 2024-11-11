@@ -1,26 +1,34 @@
-# Stage 1: Build the app with Node.js
-FROM node:18 AS build
+# Use a lightweight Node.js image as the base
+FROM node:18-alpine
 
+# Set the working directory
 WORKDIR /app
-LABEL maintainer="Adhi Wiratomo <adhitomo22@gmail.com>"
 
-# Copy package.json and install dependencies
+# Copy package*.json and package-lock.json
 COPY package*.json ./
+
+# Clean Cache
 RUN npm cache clean --force
-RUN npm install --legacy-peer-deps
 
-# Copy all files and build the app
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
 COPY . .
-RUN npm run build --prod
 
-# Stage 2: Serve the app with NGINX
+# Build the Angular app
+RUN npm run build
+
+# Use a Nginx image as the base for the production image
 FROM nginx:alpine
 
-# Copy the built app from the previous stage
-COPY --from=build /app/dist/fuse /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80 to allow external access
+# Copy the built Angular app into the Nginx default directory
+COPY --from=0 /app/dist/portfolio /usr/share/nginx/html
+
+# Expose port 80
 EXPOSE 80
 
-# Start NGINX server
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
