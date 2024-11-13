@@ -22,7 +22,7 @@ RUN npm run build
 # Use a Nginx image as the base for the production image
 FROM nginx:alpine
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the built Angular app into the Nginx default directory
 COPY --from=0 /app/dist/portfolio /usr/share/nginx/html
