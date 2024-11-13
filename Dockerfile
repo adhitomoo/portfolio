@@ -25,7 +25,7 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy the built Angular app into the Nginx default directory
-COPY --from=0 /app/dist/portfolio /usr/share/adhitomoo.my.id/html
+COPY --from=0 /app/dist/portfolio /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 3000
